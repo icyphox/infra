@@ -1,0 +1,10 @@
+longhorn
+--------
+
+    git clone https://github.com/longhorn/longhorn
+    kubectl create namespace longhorn-system
+
+    helm install longhorn ./longhorn/chart/ -n longhorn-system -f \
+    values.yaml
+
+

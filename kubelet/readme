@@ -1,0 +1,11 @@
+kubelet
+-------
+
+Set KUBELET_EXTRA_ARGS=--node-ip=192.168.4.X --resolv-conf=/run/systemd/resolve/resolv.conf
+                                             [ this part only on Ubuntu hosts]
+
+Run
+    sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+    sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
+
+to switch to iptables. Uses nftables otherwise, which isn't suported.

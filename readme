@@ -1,0 +1,16 @@
+fern
+----
+
+Infra manifests and setup notes. Runs on Kubernetes.
+
+HOSTS
+
+Machines are in a Wireguard mesh.
+
+· leaf: Oracle VM (192.168.4.1)
+· fern: Raspberry Pi 4B (192.168.4.2)
+· jade: Oracle VM (192.168.4.3)
+
+TODO
+
+· Detail components here.

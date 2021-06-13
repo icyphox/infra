@@ -1,0 +1,7 @@
+flannel
+-------
+
+    wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+Edit container args; add '--iface=wg0' to use the Wireguard LAN
+interface.
