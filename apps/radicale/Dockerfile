@@ -11,4 +11,4 @@ USER radicale
 WORKDIR /home/radicale
 EXPOSE 5232
 
-CMD ["python3", "-m", "radicale", "--storage-filesystem-folder=./collections"]
+CMD ["python3", "-m", "radicale", "--server-hosts", "0.0.0.0:5232", "--storage-filesystem-folder=./collections"]

@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header  X-Script-Name /;
+      proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header  Host $http_host;
+      proxy_pass_header Authorization;
+    kubernetes.io/tls-acme: 'true'
+    cert-manager.io/issuer: "letsencrypt-prod"
+  name: radicale-ingress
+spec:
+  tls:
+    - hosts:
+      - dav.icyphox.sh
+      secretName: radicale-certs
+  rules:
+  - host: dav.icyphox.sh
+    http:
+      paths:
+      - backend:
+          service:
+            name: radicale
+            port:
+              number: 5232
+        path: /
+        pathType: Prefix

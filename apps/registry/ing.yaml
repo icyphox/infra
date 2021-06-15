@@ -6,7 +6,8 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
     kubernetes.io/tls-acme: 'true'
-  name: fern-ingress
+    cert-manager.io/issuer: "letsencrypt-prod"
+  name: registry-ingress
 spec:
   tls:
   - hosts:
