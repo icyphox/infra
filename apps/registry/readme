@@ -1,0 +1,6 @@
+registry
+--------
+
+Container registry.
+
+· auth.yaml: secret for htpasswd auth

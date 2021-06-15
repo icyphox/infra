@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radicale
+  labels:
+    app: radicale
+spec:
+  selector:
+    matchLabels:
+      app: radicale
+  template:
+    metadata:
+      labels:
+        app: radicale
+    spec:
+      imagePullSecrets:
+        - name: registry-creds
+      nodeSelector:
+        arch: "amd64"
+      containers:
+        - name: radicale
+          image: reg.icyphox.sh/radicale
+          volumeMounts:
+            - name: collections
+              mountPath: "/home/radicale/collections"
+          ports:
+            - name: http
+              containerPort: 5000
+      volumes:
+        - name: collections
+          persistentVolumeClaim:
+            claimName: radicale-collections
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: radicale
+spec:
+  selector:
+    app: radicale
+  ports:
+    - name: http
+      port: 5232
+      targetPort: 5232
