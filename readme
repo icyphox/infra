@@ -1,5 +1,5 @@
-fern
-----
+infra
+-----
 
 Infra manifests and setup notes. Runs on Kubernetes.
 
@@ -11,6 +11,16 @@ Machines are in a Wireguard mesh.
 · fern: Raspberry Pi 4B (192.168.4.2)
 · jade: Oracle VM (192.168.4.3)
 
-TODO
 
-· Detail components here.
+INFRASTRUCTURE
+
+· cert-manager: Auto-provision Let's Encrypt Certs
+· metallb: Bare metal LoadBalancer provider
+· flannel: CNI provider
+· longhorn: Distributed block storage
+
+
+APPLICATIONS
+
+· radicale: CardDAV/CalDAV server (dav.icyphox.sh)
+· registry: Self-hosted container registry
