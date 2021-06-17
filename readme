@@ -3,6 +3,7 @@ infra
 
 Infra manifests and setup notes. Runs on Kubernetes.
 
+
 HOSTS
 
 Machines are in a Wireguard mesh.
@@ -24,3 +25,4 @@ APPLICATIONS
 
 · radicale: CardDAV/CalDAV server (dav.icyphox.sh)
 · registry: Self-hosted container registry
+· yarr: RSS reader
