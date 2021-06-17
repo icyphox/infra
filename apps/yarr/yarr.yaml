@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yarr
+  labels:
+    app: yarr
+spec:
+  selector:
+    matchLabels:
+      app: yarr
+  template:
+    metadata:
+      labels:
+        app: yarr
+    spec:
+      imagePullSecrets:
+        - name: registry-creds
+      nodeSelector:
+        arch: "arm"
+      containers:
+        - name: yarr
+          image: reg.icyphox.sh/yarr
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: auth
+              mountPath: "/config"
+              readOnly: true
+          ports:
+            - name: http
+              containerPort: 7070
+          command: ["/bin/sh"]
+          args:
+            - -c
+            - /usr/local/bin/yarr -auth-file /config/auth -addr 0.0.0.0:7070
+      volumes:
+        - name: auth
+          secret:
+            secretName: yarr-auth
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yarr
+spec:
+  selector:
+    app: yarr
+  ports:
+    - name: http
+      port: 7070
+      targetPort: 7070
