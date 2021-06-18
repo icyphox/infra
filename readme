@@ -26,3 +26,4 @@ APPLICATIONS
 · radicale: CardDAV/CalDAV server (dav.icyphox.sh)
 · registry: Self-hosted container registry
 · yarr: RSS reader
+· znc: IRC bouncer
