@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  default.conf: |
+    server {
+        listen 80;
+        root /uploads;
+        location = / {
+            default_type application/octet-stream;
+            try_files $uri =404;
+        }
+    }
+kind: ConfigMap
+metadata:
+  name: fsrv-nginx

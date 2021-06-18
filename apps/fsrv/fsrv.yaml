@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fsrv
+  labels:
+    app: fsrv
+spec:
+  selector:
+    matchLabels:
+      app: fsrv
+  template:
+    metadata:
+      labels:
+        app: fsrv
+    spec:
+      imagePullSecrets:
+        - name: registry-creds
+      nodeSelector:
+        arch: "amd64"
+      containers:
+        - name: fsrv
+          image: reg.icyphox.sh/fsrv
+          imagePullPolicy: Always
+          env:
+            - name: FSRV_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: fsrv-key
+                  key: key
+          volumeMounts:
+            - name: uploads
+              mountPath: "/uploads"
+              readOnly: false
+          ports:
+            - name: http
+              containerPort: 9393
+          command: ["/bin/sh"]
+          args:
+            - -c
+            - /fsrv/fsrv -url https://x.icyphox.sh -key $FSRV_KEY -index /fsrv/index.html -storepath /uploads
+        - name: nginx
+          image: nginx
+          volumeMounts:
+            - name: uploads
+              mountPath: "/uploads"
+              readOnly: true
+            - name: nginx-config
+              mountPath: "/etc/nginx/conf.d/"
+              readOnly: true
+          ports:
+            - name: http
+              containerPort: 80
+      volumes:
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: fsrv-uploads
+        - name: nginx-config
+          configMap:
+            name: fsrv-nginx
+            items:
+              - key: "default.conf"
+                path: "default.conf"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fsrv
+spec:
+  selector:
+    app: fsrv
+  ports:
+    - name: fsrv-http
+      port: 9393
+      targetPort: 9393
+    - name: nginx-http
+      port: 80
+      targetPort: 80

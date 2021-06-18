@@ -24,6 +24,7 @@ INFRASTRUCTURE
 APPLICATIONS
 
 · radicale: CardDAV/CalDAV server (dav.icyphox.sh)
-· registry: Self-hosted container registry
-· yarr: RSS reader
-· znc: IRC bouncer
+· registry: Self-hosted container registry (reg.icyphox.sh)
+· yarr: RSS reader (f.icyphox.sh)
+· znc: IRC bouncer (irc.icyphox.sh:6666)
+· fsrv: File host service (x.icyphox.sh)
