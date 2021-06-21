@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/tls-acme: 'true'
+    cert-manager.io/issuer: "letsencrypt-prod"
+  name: lms-ingress
+spec:
+  tls:
+    - hosts:
+      - m.icyphox.sh
+      secretName: lms-certs
+  rules:
+  - host: m.icyphox.sh
+    http:
+      paths:
+      - backend:
+          service:
+            name: lms
+            port:
+              number: 5082
+        path: /
+        pathType: Prefix
