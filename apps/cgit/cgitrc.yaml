@@ -1,0 +1,64 @@
+apiVersion: v1
+data:
+  cgitrc: |
+    virtual-root=/
+
+    ### FILTER
+    about-filter=/usr/lib/cgit/filters/about-formatting.sh
+    source-filter=/usr/lib/cgit/filters/syntax-highlighting.sh
+
+    ### IMAGES
+    css=/cgit.css
+    logo=/white.png
+    favicon=/favicon.png
+
+
+    ### SETTINGS
+    enable-http-clone=1
+    enable-index-links=0
+    enable-index-owner=0
+    clone-url=https://git.icyphox.sh/$CGIT_REPO_URL
+    snapshots=tar.gz
+
+    local-time=1
+    root-title=icy's git forge
+    root-desc=
+    root-readme=/usr/share/webapps/cgit/static/readme
+
+    ### MIME
+    mimetype.gif=image/gif
+    mimetype.html=text/html
+    mimetype.jpg=image/jpeg
+    mimetype.jpeg=image/jpeg
+    mimetype.pdf=application/pdf
+    mimetype.png=image/png
+    mimetype.svg=image/svg+xml
+
+    ### LOG SETTINGS
+    side-by-side-diffs=1
+    #enable-commit-graph=1
+    enable-log-filecount=1
+    enable-log-linecount=1
+
+    repository-sort=age
+
+    ### COMMON README PATTERNS
+    readme=:README.md
+    readme=:readme.md
+    readme=:README.rst
+    readme=:readme.rst
+    readme=:README.txt
+    readme=:readme.txt
+    readme=:README
+    readme=:readme
+
+
+    ### FEATURED REPOS
+    #section-sort=0
+    #include=/var/www/htdocs/cgit/repo-list
+
+    # scan path always goes at the end for some reason
+    scan-path=/home/git
+kind: ConfigMap
+metadata:
+  name: cgit-config
