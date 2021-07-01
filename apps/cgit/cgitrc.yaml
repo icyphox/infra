@@ -5,7 +5,7 @@ data:
 
     ### FILTER
     about-filter=/usr/lib/cgit/filters/about-formatting.sh
-    source-filter=/usr/lib/cgit/filters/syntax-highlighting.sh
+    # source-filter=/usr/lib/cgit/filters/syntax-highlighting.sh
 
     ### IMAGES
     css=/cgit.css
