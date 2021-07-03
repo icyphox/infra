@@ -20,7 +20,7 @@ spec:
       containers:
         - name: fsrv
           image: reg.icyphox.sh/fsrv
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           env:
             - name: FSRV_KEY
               valueFrom:

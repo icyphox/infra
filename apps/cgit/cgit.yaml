@@ -22,7 +22,7 @@ spec:
       containers:
         - name: cgit
           image: reg.icyphox.sh/cgit
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: git
               mountPath: "/home/git"

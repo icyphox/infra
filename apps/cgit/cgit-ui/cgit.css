@@ -7,6 +7,10 @@
 	--dark: #222;
 }
 
+body {
+  overflow-x:auto
+}
+
 /* syntax highlighting*/
 body.hl	{ background-color:var(--bg); }
 pre.hl	{ color:var(--fg); background-color:var(--bg); font-family:monospace;}

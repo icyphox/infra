@@ -22,7 +22,7 @@ spec:
       containers:
         - name: radicale
           image: reg.icyphox.sh/radicale
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: collections
               mountPath: "/home/radicale/collections"
