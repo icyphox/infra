@@ -1,0 +1,12 @@
+${BLD}MY HOMELAB SETUP${RST}
+
+Running a multi-arch Kubernetes cluster, at home.
+
+
+
+       )\`.).
+     )\`\`)\`\`) .~~
+     ).-'.-')|)
+   |-).-).-'_'-/
+${BLU}~~~${RST}\ \`o-o-o'  /${BLU}~~~~~~~~~~~~~~~~~${RST}
+${BLU} ~~~${RST}'---.____/${BLU}~~~~~~~~~~~~~~~~~${RST}

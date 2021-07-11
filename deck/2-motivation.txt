@@ -1,0 +1,9 @@
+${BLD}MOTIVATION${RST}
+
+· I self-host a lot of things
+· Terrible process management
+
+    ${GRN}\$${RST} nohup foo --bar &
+
+· Hard to keep track
+· Too manual
