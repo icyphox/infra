@@ -1,6 +1,8 @@
 infra
 -----
 
+Update 2021-07-11: I no longer run Kubernetes.
+
 Infra manifests and setup notes. Runs on Kubernetes.
 
 
