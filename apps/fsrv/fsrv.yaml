@@ -13,13 +13,11 @@ spec:
       labels:
         app: fsrv
     spec:
-      imagePullSecrets:
-        - name: registry-creds
       nodeSelector:
-        arch: "amd64"
+        kubernetes.io/hostname: sini
       containers:
         - name: fsrv
-          image: reg.icyphox.sh/fsrv
+          image: sini:5000/fsrv:latest
           imagePullPolicy: IfNotPresent
           env:
             - name: FSRV_KEY
@@ -29,7 +27,7 @@ spec:
                   key: key
           volumeMounts:
             - name: uploads
-              mountPath: "/uploads"
+              mountPath: /uploads
               readOnly: false
           ports:
             - name: http
@@ -37,29 +35,11 @@ spec:
           command: ["/bin/sh"]
           args:
             - -c
-            - /fsrv/fsrv -url https://x.icyphox.sh -key $FSRV_KEY -index /fsrv/index.html -storepath /uploads
-        - name: nginx
-          image: nginx
-          volumeMounts:
-            - name: uploads
-              mountPath: "/uploads"
-              readOnly: true
-            - name: nginx-config
-              mountPath: "/etc/nginx/conf.d/"
-              readOnly: true
-          ports:
-            - name: http
-              containerPort: 80
+            - /fsrv -url https://x.icyphox.sh -key $FSRV_KEY -index /index.html -storepath /uploads
       volumes:
         - name: uploads
-          persistentVolumeClaim:
-            claimName: fsrv-uploads
-        - name: nginx-config
-          configMap:
-            name: fsrv-nginx
-            items:
-              - key: "default.conf"
-                path: "default.conf"
+          hostPath:
+            path: /var/lib/uploads
 ---
 apiVersion: v1
 kind: Service
@@ -72,6 +52,3 @@ spec:
     - name: fsrv-http
       port: 9393
       targetPort: 9393
-    - name: nginx-http
-      port: 80
-      targetPort: 80

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legit
+  labels:
+    app: legit
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: denna
+  selector:
+    matchLabels:
+      app: legit
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: legit
+    spec:
+      containers:
+        - name: legit
+          image: sini:5000/legit:latest
+          ports:
+            - containerPort: 5555
+          command: ["/bin/sh"]
+          args:
+            - -c
+            - /legit -config /config.yaml
+          volumeMounts:
+            - name: repos
+              mountPath: /var/www/git
+              readOnly: true
+      volumes:
+        - name: repos
+          hostPath:
+            path: /home/git
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: legit
+spec:
+  selector:
+    app: legit
+  ports:
+    - name: legit-http
+      port: 5555 
+      targetPort: 5555

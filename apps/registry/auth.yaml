@@ -1,7 +1,0 @@
-apiVersion: v1
-data:
-  htpasswd: aWN5OiQyeSQwNSRtT28ud2ZnbXhKUFpTek1kL1hYUDhPUm5FSTY2UGdyb05OVTJIUUdEcy43eE9lVXRCVlpXaQoK
-kind: Secret
-metadata:
-  creationTimestamp: null
-  name: registry-auth

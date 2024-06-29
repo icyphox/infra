@@ -1,7 +1,0 @@
-${BLD}NODES${RST}
-
-3 nodes:
-
-· fern: Raspberry Pi 4B (armhf)
-· jade: Oracle VM (amd64)
-· leaf: Oracle VM (amd64)
