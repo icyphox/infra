@@ -1,0 +1,15 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: koti-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 100.85.88.64/32
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: koti-pool
+  namespace: metallb-system
+

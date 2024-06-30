@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: imaginary
+  labels:
+    app: imaginary
+spec:
+  selector:
+    matchLabels:
+      app: imaginary
+  template:
+    metadata:
+      labels:
+        app: imaginary
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: sini
+      containers:
+        - name: imaginary
+          image: h2non/imaginary:latest
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: film
+              mountPath: /film
+              readOnly: false
+          ports:
+            - name: http
+              containerPort: 9000
+          env:
+            - name: DEBUG
+              value: "*"
+          command: ["imaginary"]
+          args:
+            - -mount
+            - /film
+            - -a
+            - 0.0.0.0
+      volumes:
+        - name: film
+          hostPath:
+            path: /var/lib/uploads/film
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: imaginary
+spec:
+  selector:
+    app: imaginary
+  ports:
+    - name: imaginary-http
+      port: 9000
+      targetPort: 9000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: x.icyphox.sh
+  namespace: default
+spec:
+  ingressClassName: caddy
+  rules:
+  - host: x.icyphox.sh
+    http:
+      paths:
+      - path: /fit
+        pathType: Prefix
+        backend:
+          service:
+            name: imaginary
+            port:
+              number: 9000
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: fsrv
+            port:
+              number: 9393

@@ -18,7 +18,7 @@ spec:
       containers:
         - name: fsrv
           image: sini:5000/fsrv:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           env:
             - name: FSRV_KEY
               valueFrom:
@@ -32,10 +32,15 @@ spec:
           ports:
             - name: http
               containerPort: 9393
-          command: ["/bin/sh"]
           args:
-            - -c
-            - /fsrv -url https://x.icyphox.sh -key $FSRV_KEY -index /index.html -storepath /uploads
+            - -url
+            - https://x.icyphox.sh
+            - -key 
+            - $FSRV_KEY
+            - -index
+            - /index.html 
+            - -storepath 
+            - /uploads
       volumes:
         - name: uploads
           hostPath:
@@ -52,3 +57,23 @@ spec:
     - name: fsrv-http
       port: 9393
       targetPort: 9393
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: x.icyphox.sh
+  namespace: default
+spec:
+  ingressClassName: caddy
+  rules:
+  - host: x.icyphox.sh
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: fsrv
+            port:
+              number: 9393
+

@@ -1,0 +1,15 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: caddy-ingress
+  namespace: caddy-system
+spec:
+  repo: https://caddyserver.github.io/ingress/
+  chart: caddy-ingress-controller
+  targetNamespace: caddy-system
+  valuesContent: |-
+    fullnameOverrride: caddy-ingress
+    ingressController:
+      config:
+        email: anirudh@oppiliappan.com
+    replicaCount: 1

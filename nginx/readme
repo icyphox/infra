@@ -1,7 +1,0 @@
-nginx
------
-
-Non-terminating SSL passthrough back to our K8s ingress, plus port 80
-proxying for cert-manager solvers.
-
-Runs on jade.

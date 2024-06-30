@@ -1,34 +1,27 @@
 infra
 -----
 
-Update 2021-07-11: I no longer run Kubernetes.
-
-Infra manifests and setup notes. Runs on Kubernetes.
+Infra manifests and setup notes. Runs on Kubernetes (K3s).
 
 
 HOSTS
 
-Machines are in a Wireguard mesh.
+Machines are in a Tailscale mesh, with K3s and MetalLB advertising on
+the Tailscale interface.
 
-· leaf: Oracle VM (192.168.4.1)
-· fern: Raspberry Pi 4B (192.168.4.2)
-· jade: Oracle VM (192.168.4.3)
+• sini: 8GB, i5-6500T, 256GB SSD
 
 
 INFRASTRUCTURE
 
-· cert-manager: Auto-provision Let's Encrypt Certs
-· metallb: Bare metal LoadBalancer provider
-· flannel: CNI provider
-· longhorn: Distributed block storage
+• k3s: Kubernetes distribution
+• tailscale: mesh network 
+• metallb: bare metal LoadBalancer provider
 
 
 APPLICATIONS
 
-· radicale: CardDAV/CalDAV server (dav.icyphox.sh)
-· registry: Self-hosted container registry (reg.icyphox.sh)
-· yarr: RSS reader (f.icyphox.sh)
-· znc: IRC bouncer (irc.icyphox.sh:6666)
-· fsrv: File host service (x.icyphox.sh)
-· lms: Music/Subsonic server (m.icyphox.sh)
-· cgit: Git web frontend (git.icyphox.sh)
+• radicale: CardDAV/CalDAV server (dav.koti.lan)
+• yarr: RSS reader (rss.koti.lan)
+• fsrv: file host service (x.icyphox.sh)
+• legit: git web frontend (git.icyphox.sh)
