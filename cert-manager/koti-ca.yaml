@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: koti-ca
+  namespace: default
+spec:
+  isCA: true
+  commonName: koti-ca
+  secretName: koti-ca
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: root-issuer
+    kind: Issuer
+    group: cert-manager.io
