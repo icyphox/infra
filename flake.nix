@@ -1,6 +1,4 @@
 {
-  description = "web frontend for git";
-
   inputs.nixpkgs.url = "github:nixos/nixpkgs";
 
   outputs =
