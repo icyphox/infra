@@ -127,7 +127,8 @@ data:
     koti.lan:53 {
         kubernetes koti.lan
 
-        rewrite name dav.koti.lan radicale.default.svc.koti.lan
+        rewrite name dav.koti.lan caddy-ingress-caddy-ingress-controller.caddy-system.svc.koti.lan
+        rewrite name rss.koti.lan caddy-ingress-caddy-ingress-controller.caddy-system.svc.koti.lan
     }
 
     import /etc/coredns/custom/*.server
