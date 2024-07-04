@@ -1,13 +1,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: koti-lan
+  name: dav-koti-lan
   namespace: default
 spec:
-  secretName: koti-lan-tls
+  secretName: dav-koti-lan
   isCA: false
+  commonName: "dav.koti.lan"
   dnsNames:
-  - "koti.lan"
-  - "*.koti.lan"
+  - "dav.koti.lan"
   issuerRef:
     name: koti-ca-issuer

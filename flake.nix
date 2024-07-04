@@ -7,12 +7,37 @@
     ,
     }:
     let
-      supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
     in
     {
-      defaultPackage = forAllSystems (system: self.packages.${system}.legit);
+      packages = forAllSystems (system:
+        let
+          pkgs = nixpkgsFor.${system};
+          fsrv = self.packages.${system}.fsrv;
+          files = pkgs.lib.fileset.toSource {
+            root = ./.;
+            fileset = pkgs.lib.fileset.unions [
+              ./index.html
+            ];
+          };
+        in
+        {
+          yarrContainer = pkgs.dockerTools.buildLayeredImage {
+            name = "sini:5000/yarr";
+            tag = "latest";
+            contents = [
+              pkgs.yarr
+            ];
+            config = {
+              Entrypoint = [ "${pkgs.yarr}/bin/yarr" ];
+              ExposedPorts = { "7070/tcp" = { }; };
+            };
+          };
+        });
+
+      defaultPackage = forAllSystems (system: self.packages.${system}.fsrv);
       devShells = forAllSystems (system:
         let
           pkgs = nixpkgsFor.${system};
@@ -21,6 +46,8 @@
           default = pkgs.mkShell {
             nativeBuildInputs = with pkgs; [
               kubectl
+              kubectx
+              go
             ];
           };
         });

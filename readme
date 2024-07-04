@@ -17,6 +17,7 @@ INFRASTRUCTURE
 • k3s: Kubernetes distribution
 • tailscale: mesh network 
 • metallb: bare metal LoadBalancer provider
+• coredns: DNS server
 
 
 APPLICATIONS
@@ -24,4 +25,7 @@ APPLICATIONS
 • radicale: CardDAV/CalDAV server (dav.koti.lan)
 • yarr: RSS reader (rss.koti.lan)
 • fsrv: file host service (x.icyphox.sh)
+• site: my personal website (icyphox.sh, anirudh.fi)
 • legit: git web frontend (git.icyphox.sh)
+• imaginary: image manipuation service (x.icyphox.sh, cdn.icyphox.sh)
+• pixelfed: private image hosting
