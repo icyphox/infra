@@ -1,0 +1,16 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  repo: https://grafana.github.io/helm-charts
+  chart: grafana
+  targetNamespace: monitoring
+  valuesContent: |-
+    grafana.ini:
+      auth:
+        anonymous:
+          enabled: true
+          org_name: koti
+

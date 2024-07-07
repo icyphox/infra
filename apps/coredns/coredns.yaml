@@ -2,13 +2,13 @@ apiVersion: v1
 data:
   koti.lan.server: |
     koti.lan:53 {
+        log
         kubernetes koti.lan
 
         rewrite name dav.koti.lan radicale.default.svc.koti.lan
         rewrite name rss.koti.lan yarr.default.svc.koti.lan
+        rewrite name g.koti.lan grafana.monitoring.svc.koti.lan
     }
-
-    import /etc/coredns/custom/*.server
 kind: ConfigMap
 metadata:
   name: coredns-custom

@@ -21,6 +21,7 @@ INFRASTRUCTURE
 • coredns: DNS server
 • longhorn: distributed block storage
 • caddy: ingress controller
+• prometheus/grafana: stats and visualisation
 
 
 APPLICATIONS
