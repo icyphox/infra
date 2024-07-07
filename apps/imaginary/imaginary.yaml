@@ -13,8 +13,6 @@ spec:
       labels:
         app: imaginary
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: sini
       containers:
         - name: imaginary
           image: h2non/imaginary:latest

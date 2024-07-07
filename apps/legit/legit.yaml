@@ -16,6 +16,8 @@ spec:
       labels:
         app: legit
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: denna
       containers:
         - name: legit
           image: sini:5000/legit:latest
