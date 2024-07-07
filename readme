@@ -10,14 +10,17 @@ Machines are in a Tailscale mesh, with K3s and MetalLB advertising on
 the Tailscale interface.
 
 • sini: 8GB, i5-6500T, 256GB SSD
+• denna: 8GB, N100, 128GB eMMC
 
 
 INFRASTRUCTURE
 
 • k3s: Kubernetes distribution
-• tailscale: mesh network 
+• tailscale: mesh network
 • metallb: bare metal LoadBalancer provider
 • coredns: DNS server
+• longhorn: distributed block storage
+• caddy: ingress controller
 
 
 APPLICATIONS
@@ -29,3 +32,4 @@ APPLICATIONS
 • legit: git web frontend (git.icyphox.sh)
 • imaginary: image manipuation service (x.icyphox.sh, cdn.icyphox.sh)
 • pixelfed: private image hosting
+• honk: ActivityPub server (h.icyphox.sh)
