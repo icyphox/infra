@@ -1,2 +1,3 @@
 *certs*
+.direnv/
 rootca.crt
