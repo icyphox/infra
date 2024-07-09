@@ -1,3 +1,5 @@
 *certs*
 .direnv/
 rootca.crt
+./tmp
+result

@@ -47,6 +47,7 @@
             nativeBuildInputs = with pkgs; [
               kubectl
               kubectx
+              kubernetes-helm
               go
             ];
           };

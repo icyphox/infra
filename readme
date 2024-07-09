@@ -10,6 +10,7 @@ Machines are in a Tailscale mesh, with K3s and MetalLB advertising on
 the Tailscale interface.
 
 • sini: 8GB, i5-6500T, 256GB SSD
+• iso: 8GB, i5-6500, 500GB HDD
 • denna: 8GB, N100, 128GB eMMC
 
 
