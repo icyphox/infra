@@ -8,6 +8,7 @@ data:
         rewrite name dav.koti.lan radicale.default.svc.koti.lan
         rewrite name rss.koti.lan yarr.default.svc.koti.lan
         rewrite name g.koti.lan grafana.monitoring.svc.koti.lan
+        rewrite name files.garage.koti.lan garage.default.svc.koti.lan
     }
 kind: ConfigMap
 metadata:

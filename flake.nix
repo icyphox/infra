@@ -49,6 +49,7 @@
               kubectx
               kubernetes-helm
               go
+              awscli2
             ];
           };
         });
