@@ -67,6 +67,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: fsrv
+            name: garage
             port:
-              number: 9393
+              number: 80

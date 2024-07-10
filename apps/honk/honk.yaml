@@ -20,13 +20,11 @@ spec:
       containers:
         - name: honk
           image: sini:5000/honk:latest
+          imagePullPolicy: Always
           volumeMounts:
             - name: data
               mountPath: /data
               readOnly: false
-            - name: certs
-              mountPath: /etc/ssl/certs
-              readOnly: true
           ports:
             - name: http
               containerPort: 8080
@@ -37,9 +35,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: honk-data
-        - name: certs
-          hostPath:
-            path: /etc/ssl/certs
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
