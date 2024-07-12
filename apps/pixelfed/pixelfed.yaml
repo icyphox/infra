@@ -11,8 +11,14 @@ kind: Ingress
 metadata:
   name: ani.place
   namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
-  ingressClassName: caddy
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - ani.place
+      secretName: ani-place-tls
   rules:
   - host: ani.place
     http:

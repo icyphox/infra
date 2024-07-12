@@ -21,7 +21,7 @@ INFRASTRUCTURE
 • metallb: bare metal LoadBalancer provider
 • coredns: DNS server
 • longhorn: distributed block storage
-• caddy: ingress controller
+• nginx: ingress controller
 • prometheus/grafana: stats and visualisation
 
 

@@ -50,8 +50,14 @@ kind: Ingress
 metadata:
   name: x.icyphox.sh
   namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
-  ingressClassName: caddy
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - x.icyphox.sh
+      secretName: x-icyphox-sh-tls
   rules:
   - host: x.icyphox.sh
     http:

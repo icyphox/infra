@@ -1,0 +1,13 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: koti
+  namespace: ingress-nginx
+spec:
+  repo: https://kubernetes.github.io/ingress-nginx
+  chart: ingress-nginx
+  targetNamespace: ingress-nginx
+  valuesContent: |-
+    controller:
+      allowSnippetAnnotations: true
+

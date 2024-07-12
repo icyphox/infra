@@ -4,9 +4,18 @@ metadata:
   name: icyphox.sh
   namespace: default
   annotations:
-    caddy.ingress.kubernetes.io/permanent-redirect: "https://anirudh.fi"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location = /.well-known/webfinger {
+        return 301 https://h.icyphox.sh$request_uri;
+      }
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
-  ingressClassName: caddy
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - icyphox.sh
+    secretName: icyphox-sh-tls
   rules:
   - host: icyphox.sh
     http:
@@ -25,7 +34,11 @@ metadata:
   name: anirudh.fi
   namespace: default
 spec:
-  ingressClassName: caddy
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - anirudh.fi
+    secretName: anirudh-fi-tls
   rules:
   - host: anirudh.fi
     http:
