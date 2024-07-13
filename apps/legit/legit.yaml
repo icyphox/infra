@@ -18,6 +18,9 @@ spec:
     spec:
       nodeSelector:
         kubernetes.io/hostname: denna
+      securityContext:
+        runAsUser: 1001  # git
+        runAsGroup: 100  # users
       containers:
         - name: legit
           image: sini:5000/legit:latest
