@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miniflux
+  labels:
+    app: miniflux
+spec:
+  selector:
+    matchLabels:
+      app: miniflux
+  template:
+    metadata:
+      labels:
+        app: miniflux
+    spec:
+      containers:
+        - name: miniflux
+          image: ghcr.io/miniflux/miniflux
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: postgres-password
+            - name: DATABASE_URL
+              value: "postgres://postgres:$(POSTGRES_PASSWORD)@postgres.default:5432/miniflux?sslmode=disable"
+            - name: RUN_MIGRATIONS
+              value: "1"
+            - name: CREATE_ADMIN
+              value: "1"
+            - name: ADMIN_USERNAME
+              value: icy
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: miniflux
+                  key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: miniflux
+spec:
+  selector:
+    app: miniflux
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080

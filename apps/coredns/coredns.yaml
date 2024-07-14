@@ -6,7 +6,7 @@ data:
         kubernetes koti.lan
 
         rewrite name dav.koti.lan radicale.default.svc.koti.lan
-        rewrite name rss.koti.lan yarr.default.svc.koti.lan
+        rewrite name feed.koti.lan miniflux.default.svc.koti.lan
         rewrite name g.koti.lan grafana.monitoring.svc.koti.lan
         rewrite name files.garage.koti.lan garage.default.svc.koti.lan
     }
