@@ -28,7 +28,7 @@ INFRASTRUCTURE
 APPLICATIONS
 
 • radicale: CardDAV/CalDAV server (dav.koti.lan)
-• yarr: RSS reader (rss.koti.lan)
+• miniflux: RSS reader
 • legit: git web frontend (git.icyphox.sh)
 • imaginary: image manipuation service (x.icyphox.sh, cdn.icyphox.sh)
 • pixelfed: private image hosting
