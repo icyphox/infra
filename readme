@@ -34,3 +34,4 @@ APPLICATIONS
 • pixelfed: private image hosting
 • honk: ActivityPub server (h.icyphox.sh)
 • garage: object storage service for website and files (icyphox.sh, x.icyphox.sh)
+• vaultwarden: password manager (pass.koti.lan)
