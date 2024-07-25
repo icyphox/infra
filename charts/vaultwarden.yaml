@@ -27,3 +27,8 @@ spec:
       size: 2Gi
       class: longhorn
       keepPvc: true
+    pushNotifications:
+      installationId: b029be00-7ea1-40bd-9ade-b1b800d91667
+      installationKey: ok1vzce9HEb1tH4Wk4Em
+      relayUri: "https://api.bitwarden.eu"
+      identityUri: "https://identity.bitwarden.eu"
