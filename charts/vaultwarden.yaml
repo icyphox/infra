@@ -1,0 +1,29 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: vaultwarden
+  namespace: default
+spec:
+  repo: https://guerzon.github.io/vaultwarden
+  chart: vaultwarden
+  targetNamespace: default
+  valuesContent: |-
+    image:
+      tag: testing-alpine
+    domain: "http://pass.koti.lan"
+    ingress:
+      enabled: true
+      hostname: pass.koti.lan
+      class: nginx
+      tls: true
+      tlsSecret: pass-koti-lan
+    database:
+      type: postgresql
+      existingSecret: vaultwarden-uri
+      existingSecretKey: uri
+    adminToken: {}
+    data:
+      name: vaultwarden-data
+      size: 2Gi
+      class: longhorn
+      keepPvc: true

@@ -19,8 +19,8 @@ spec:
       nodeSelector:
         kubernetes.io/hostname: denna
       securityContext:
-        runAsUser: 1001  # git
-        runAsGroup: 100  # users
+        runAsUser: 1001 # git
+        runAsGroup: 100 # users
       containers:
         - name: legit
           image: sini:5000/legit:latest
@@ -48,7 +48,7 @@ spec:
     app: legit
   ports:
     - name: legit-http
-      port: 5555 
+      port: 5555
       targetPort: 5555
 ---
 apiVersion: networking.k8s.io/v1
@@ -58,21 +58,24 @@ metadata:
   namespace: default
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/configuration-snippet: |-
+      location /robots.txt {
+        return 200 "User-Agent: Amazonbot\nDisallow: /\n\nUser-Agent: AhrefsBot\nDisallow: /\n";
+      }
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
-      - git.icyphox.sh
+        - git.icyphox.sh
       secretName: git-icyphox-sh-tls
   rules:
-  - host: git.icyphox.sh
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: legit
-            port:
-              number: 5555
-
+    - host: git.icyphox.sh
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: legit
+                port:
+                  number: 5555
