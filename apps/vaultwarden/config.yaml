@@ -1,0 +1,49 @@
+apiVersion: v1
+data:
+  DISABLE_ADMIN_TOKEN: "true"
+  ADMIN_RATELIMIT_MAX_BURST: "3"
+  ADMIN_RATELIMIT_SECONDS: "300"
+  DATA_FOLDER: /data
+  DATABASE_MAX_CONNS: "10"
+  DB_CONNECTION_RETRIES: "15"
+  DOMAIN: http://pass.koti.lan
+  EMAIL_CHANGE_ALLOWED: "true"
+  EMERGENCY_ACCESS_ALLOWED: "true"
+  EMERGENCY_NOTIFICATION_REMINDER_SCHEDULE: 0 3 * * * *
+  EMERGENCY_REQUEST_TIMEOUT_SCHEDULE: 0 7 * * * *
+  EXTENDED_LOGGING: "true"
+  ICON_BLACKLIST_NON_GLOBAL_IPS: "true"
+  ICON_REDIRECT_CODE: "302"
+  ICON_SERVICE: internal
+  INVITATION_EXPIRATION_HOURS: "120"
+  INVITATION_ORG_NAME: Vaultwarden
+  INVITATIONS_ALLOWED: "true"
+  IP_HEADER: X-Real-IP
+  LOG_TIMESTAMP_FORMAT: "%Y-%m-%d %H:%M:%S.%3f"
+  ORG_EVENTS_ENABLED: "false"
+  ORG_GROUPS_ENABLED: "false"
+  PUSH_ENABLED: "true"
+  PUSH_IDENTITY_URI: https://identity.bitwarden.eu
+  PUSH_INSTALLATION_ID: 9f08a610-b413-4e6b-b07c-b1b9008435dc
+  PUSH_INSTALLATION_KEY: HY8uowMTFT9GgbcSfPMF
+  PUSH_RELAY_URI: https://api.bitwarden.eu
+  REQUIRE_DEVICE_EMAIL: "false"
+  ROCKET_ADDRESS: 0.0.0.0
+  ROCKET_PORT: "8080"
+  ROCKET_WORKERS: "10"
+  SENDS_ALLOWED: "false"
+  SHOW_PASSWORD_HINT: "false"
+  SIGNUPS_ALLOWED: "true"
+  SIGNUPS_VERIFY: "true"
+  TRASH_AUTO_DELETE_DAYS: ""
+  TZ: Europe/Helsinki
+  WEB_VAULT_ENABLED: "true"
+  WEBSOCKET_ENABLED: "false"
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/component: vaultwarden
+    app.kubernetes.io/instance: vaultwarden
+    app.kubernetes.io/name: vaultwarden
+  name: vaultwarden
+  namespace: default
