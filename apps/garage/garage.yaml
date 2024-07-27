@@ -100,7 +100,7 @@ spec:
             capabilities:
               drop:
               - ALL
-            readOnlyRootFilesystem: true
+            readOnlyRootFilesystem: false
           image: "dxflrs/amd64_garage:v1.0.0"
           imagePullPolicy: IfNotPresent
           ports:
