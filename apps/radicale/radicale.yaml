@@ -22,33 +22,14 @@ spec:
           volumeMounts:
             - name: collections
               mountPath: /data/collections
-            - name: tls
-              mountPath: /tls
           ports:
             - name: http
               containerPort: 5232
           command: ["/venv/bin/radicale", "--config", "/config/config"]
-          args:
-            - --ssl 
-            - "true"
-            - -c
-            - /tls/tls.crt
-            - -k 
-            - /tls/tls.key
       volumes:
         - name: collections
           persistentVolumeClaim:
             claimName: radicale-collections
-        - name: tls
-          projected:
-            sources:
-              - secret:
-                  name: dav-koti-lan
-                  items:
-                  - key: tls.crt
-                    path: tls.crt
-                  - key: tls.key
-                    path: tls.key
 ---
 apiVersion: v1
 kind: Service
@@ -58,8 +39,8 @@ spec:
   selector:
     app: radicale
   ports:
-    - name: https
-      port: 443
+    - name: http
+      port: 80
       targetPort: 5232
 ---
 apiVersion: v1
@@ -73,3 +54,32 @@ spec:
   resources:
     requests:
       storage: 100Mi
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  labels:
+    app.kubernetes.io/component: radicale
+    app.kubernetes.io/instance: radicale
+    app.kubernetes.io/name: radicale
+  name: dav.koti.lan
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: dav.koti.lan
+      http:
+        paths:
+          - backend:
+              service:
+                name: radicale
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - dav.koti.lan
+      secretName: dav-koti-lan
