@@ -1,0 +1,83 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: transmission
+  namespace: default
+  labels:
+    app: transmission
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transmission
+  template:
+    metadata:
+      name: transmission
+      namespace: default
+      labels:
+        app: transmission
+    spec:
+      containers:
+        - name: transmission
+          image: ghcr.io/linuxserver/transmission
+          ports:
+            - containerPort: 9091
+              protocol: TCP
+            - containerPort: 51413
+              protocol: TCP
+            - containerPort: 51413
+              protocol: UDP
+          volumeMounts:
+            - mountPath: /downloads
+              name: data
+              subPath: downloads
+            - mountPath: /config
+              name: data
+              subPath: config
+            - mountPath: /watch
+              name: data
+              subPath: watch
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Helsinki"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: transmission-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: transmission-data
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: transmission
+  namespace: default
+spec:
+  type: ClusterIP
+  selector:
+    app: transmission
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9091
+      name: web
+    - protocol: TCP
+      name: torrent-tcp
+      port: 51413
+    - protocol: UDP
+      name: torrents-udp
+      port: 51413
