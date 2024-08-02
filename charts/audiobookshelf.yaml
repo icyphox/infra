@@ -10,11 +10,13 @@ spec:
     persistence:
       config:
         enabled: true
+        size: 2Gi
         mountPath: /config
       audiobooks:
         enabled: true
         existingClaim: transmission-data
         mountPath: /audiobooks
       metadata:
+        size: 1Gi
         enabled: true
         mountPath: /metadata
