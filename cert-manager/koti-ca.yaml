@@ -8,7 +8,7 @@ spec:
   commonName: koti-ca
   secretName: koti-ca
   duration: 87600h # 10 years
-  renewBefore: 78840h # 9 years
+  renewBefore: 24h
   privateKey:
     algorithm: ECDSA
     size: 256
