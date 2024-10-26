@@ -101,7 +101,7 @@ spec:
               drop:
               - ALL
             readOnlyRootFilesystem: false
-          image: "dxflrs/amd64_garage:v1.0.0"
+          image: "dxflrs/amd64_garage:v1.0.1"
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3900
