@@ -1,0 +1,33 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: bsky-pds
+  namespace: default
+spec:
+  repo: https://charts.nerkho.ch
+  chart: bluesky-pds
+  targetNamespace: default
+  valuesContent: |-
+    fullnameOverride: bsky-pds
+    image:
+      tag: 0.4.67
+    pds:
+      config:
+        hostname: pds.icyphox.sh
+        secrets:
+          existingSecret: pds
+    ingress:
+      enabled: true
+      className: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      hosts:
+        - host: pds.icyphox.sh
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: pds-icyphox-sh-tls
+          hosts:
+            - pds.icyphox.sh
