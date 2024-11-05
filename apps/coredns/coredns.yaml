@@ -10,6 +10,7 @@ data:
         rewrite name g.koti.lan grafana.monitoring.svc.koti.lan
         rewrite name files.garage.koti.lan garage.default.svc.koti.lan
         rewrite name pass.koti.lan koti-ingress-nginx-controller.ingress-nginx.svc.koti.lan
+        rewrite name red.koti.lan koti-ingress-nginx-controller.ingress-nginx.svc.koti.lan
     }
 kind: ConfigMap
 metadata:

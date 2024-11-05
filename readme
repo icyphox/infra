@@ -38,3 +38,6 @@ APPLICATIONS
 • transmission: torrent client
 • audiobookshelf: audiobook server
 • bsky-pds: bluesky personal data store
+• readit: minimalist reddit client (red.koti.lan) [0]
+
+[0]: https://git.peppe.rs/web/readit
