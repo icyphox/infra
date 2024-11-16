@@ -8,3 +8,5 @@ spec:
   targetNamespace: default
   valuesContent: |-
     fullnameOverride: postgres
+    image:
+      tag: 16
