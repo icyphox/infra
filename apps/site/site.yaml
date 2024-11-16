@@ -13,30 +13,30 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - icyphox.sh
-    secretName: icyphox-sh-tls
+    - hosts:
+        - icyphox.sh
+      secretName: icyphox-sh-tls
   rules:
-  - host: icyphox.sh
-    http:
-      paths:
-      - path: /.well-known/webfinger
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: honk
-            port:
-              number: 8080
-  - host: icyphox.sh
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: garage
-            port:
-              number: 80
+    - host: icyphox.sh
+      http:
+        paths:
+          - path: /.well-known/webfinger
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: honk
+                port:
+                  number: 8080
+    - host: icyphox.sh
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: garage
+                port:
+                  number: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -49,18 +49,39 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - anirudh.fi
-    secretName: anirudh-fi-tls
+    - hosts:
+        - anirudh.fi
+      secretName: anirudh-fi-tls
   rules:
-  - host: anirudh.fi
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: garage
-            port:
-              number: 80
-
+    - host: anirudh.fi
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: garage
+                port:
+                  number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: oppiliappan.com
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      return 301 https://anirudh.fi$request_uri;
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: oppiliappan.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: garage
+                port:
+                  number: 80
