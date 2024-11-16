@@ -33,7 +33,7 @@ spec:
           envFrom:
             - configMapRef:
                 name: vaultwarden
-          image: docker.io/vaultwarden/server:testing-alpine
+          image: docker.io/vaultwarden/server:1.32.4
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10
